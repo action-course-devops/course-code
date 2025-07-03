@@ -1,0 +1,43 @@
+name: Manually Triggered Workflow
+on: 
+  workflow_dispatch:
+    inputs:
+      string:
+        description: 'A string input for the workflow'
+        type: string
+        required: true
+        default: 'default value'
+      number:
+        description: 'A number input for the workflow'
+        type: number
+        required: false
+        default: 42
+      option:
+        description: 'An option input for the workflow'
+        type: choice
+        options:
+          - option1
+          - option2
+          - option3
+        required: true
+        default: option1
+      boolean:
+        description: 'A boolean input for the workflow'
+        type: boolean
+        required: false
+      environment:
+        description: 'An environment input for the workflow'
+        type: environment
+        required: true
+        default: production
+jobs:
+  log-info: 
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $GITHUB_REF
+      - run: |
+            echo "String input: ${{ inputs.string }}"
+            echo "Number input: ${{ inputs.number }}"
+            echo "Option input: ${{ inputs.option }}"
+            echo "Boolean input: ${{ inputs.boolean }}"
+            echo "Environment input: ${{ inputs.environment }}"
