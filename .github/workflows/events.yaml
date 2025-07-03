@@ -1,8 +1,27 @@
 name: Repository events
 on:
   push:
+    branches:
+      - main
+      - "feature/*" # Matches branches like feature/xyz, does not match feature/xyz/abc
+      - "feature/**" # Matches branches like feature/xyz/abc, feature/xyz, etc.
+      - "!feature/xyz" # Excludes the specific branch feature/xyz
+    # branches-ignore: # Cannot use branches-ignore with branches
+    #   - "feature/xyz/abc" # Excludes branches like feature/xyz/abc
+    tags:
+      - "v1.*" # Matches tags like v1.0, v1.1,v1.1.2 etc.
+      - "!v2.*" # Excludes tags like v2.0, v2.1, etc.
+    paths:
+      - "src/**" # Matches any changes in the src directory
+      - "**.js" # Matches any changes in JavaScript files
+      - "!src/ignore/**" # Excludes changes in the src/ignore directory
+      - "!docs/**" # Excludes changes in the docs directory
   pull_request:
     types: [opened,assigned,reopened,synchronize]
+    branches:
+      - main
+    paths:
+      - "**.js" # Matches any changes in JavaScript files
   issues:
     types: [opened]
 
