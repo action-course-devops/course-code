@@ -1,0 +1,9 @@
+name: External Events Workflow
+on:
+  repository_dispatch:
+    types: [build] # This event type can be customized as needed
+jobs:
+  echo-a-string:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Repository Dispatch"
