@@ -11,6 +11,7 @@ jobs:
       permissions: 
         issues: read
         contents: read
+        #pull-requests: write uncomment this to fix the error
       steps:
         - name: Comment on New PRs
           uses: actions/github-script@v6
