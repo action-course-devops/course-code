@@ -1,0 +1,16 @@
+name: Calling Reusable workflow
+on: 
+  workflow_dispatch: 
+    inputs:
+      name:
+        description: "Input description"
+        type: string
+        default: "Subin"
+        required: false
+jobs:
+  calling-a-reusable-wf:
+    uses: action-course-devops/workflows/.github/workflows/reusable.yaml@main
+    with:
+      name: ${{ inputs.name }}
+    secrets: 
+      access-token: ${{ secrets.ACCESS_TOKEN }}     
