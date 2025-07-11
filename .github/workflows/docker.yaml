@@ -22,12 +22,19 @@ jobs:
           cat /etc/os-release
       - name: Log Env
         run: echo $API_URL
+      - name: Create a file
+        run: echo 'Some text' > text.txt
       - name: Container in a step
         uses: docker://node:18.16-alpine3.17
         with:
-          entrypoint: /usr/local/bin/node
+          entrypoint: /usr/local/bin/node # node image already has default entrypoint node so we can skip this line
           args: -p 2+3
       - name: Log node Versions
         uses: docker://node:18.16-alpine3.17
         with:
           args: -v
+      - name: Show file contents  #All containers share same volume with runner machine
+        uses: docker://node:18.16-alpine3.17
+        with: 
+          entrypoint: cat
+          args: text.txt
